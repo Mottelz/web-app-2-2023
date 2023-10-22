@@ -17,6 +17,17 @@ app.get('/', (req, res) => {
     res.json({msg: "this works"});
 });
 
+
+app.all('*', (req, res) => {
+    res.status(404).send('Not Found');
+});
+
+const errorHandler = (err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+};
+app.use(errorHandler);
+
 app.listen(port, () => {
     console.log(`App running at http://localhost:${port}`)
 });
