@@ -13,10 +13,14 @@ app.use(cors());
 const adminRouter = require('./lib/components/admin/routes');
 const clientRouter = require('./lib/components/client/routes');
 const healthcheckRouter = require('./lib/components/healthcheck/routes');
+const hoursRouter = require('./lib/components/hour/routes');
+const invoiceRouter = require('./lib/components/invoice/routes');
 
 app.use('/admin', adminRouter);
 app.use('/client', clientRouter);
 app.use('/healthcheck', healthcheckRouter);
+app.use('/hour', hoursRouter);
+app.use('/invoice', invoiceRouter);
 
 app.get('/', (req, res) => {
     res.json({msg: "this works"});

@@ -1,9 +1,8 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const db = require('./data.js');
 
 // get all clients
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
     const clients = await db.getClients();
     res.json({clients: clients});
 });

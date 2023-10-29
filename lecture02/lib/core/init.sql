@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS invoice_line;
-DROP TABLE IF EXISTS invoice;
+DROP TABLE IF EXISTS invoice_lines;
+DROP TABLE IF EXISTS invoices;
 DROP TABLE IF EXISTS hours;
 DROP TABLE IF EXISTS clients;
 
