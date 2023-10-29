@@ -1,3 +1,4 @@
+const fs = require('fs');
 const db = require('better-sqlite3')('./payme.db', { verbose: console.log });
 
 // initialize the database using the script in init.sql

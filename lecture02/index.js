@@ -10,7 +10,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // load routers
-const healthcheckRouter = require('./components/healthcheck/routes');
+const adminRouter = require('./lib/components/admin/routes');
+const clientRouter = require('./lib/components/client/routes');
+const healthcheckRouter = require('./lib/components/healthcheck/routes');
+
+app.use('/admin', adminRouter);
+app.use('/client', clientRouter);
 app.use('/healthcheck', healthcheckRouter);
 
 app.get('/', (req, res) => {
