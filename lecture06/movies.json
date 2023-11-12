@@ -1,0 +1,37 @@
+[
+    {
+        "title": "The Shawshank Redemption",
+        "year": 1994,
+        "rating": 9
+    },
+    {
+        "title": "The Godfather",
+        "year": 1994,
+        "rating": 8
+    },
+    {
+        "title": "The Big Lebowski",
+        "year": 1999,
+        "rating": 8
+    },
+    {
+        "title": "The Matrix",
+        "year": 1999,
+        "rating": 10
+    },
+    {
+        "title": "The Brother's Bloom",
+        "year": 2008,
+        "rating": 10
+    },
+    {
+        "title": "Fargo",
+        "year": 2008,
+        "rating": 9
+    },
+    {
+        "title": "Burn After Reading",
+        "year": 2010,
+        "rating": 8
+    }
+]
