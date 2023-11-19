@@ -42,3 +42,5 @@ router.get('/client/:clientId', async (req, res) => {
     const info = await db.getHoursByClientId(clientId);
     res.send(info);
 });
+
+module.exports = router;

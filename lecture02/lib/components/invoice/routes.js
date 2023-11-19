@@ -39,3 +39,5 @@ router.put('/paid/:id', async (req, res) => {
     const info = await db.markInvoiceAsPaidById(id, date_paid);
     res.send(info);
 });
+
+module.exports = router;

@@ -1,0 +1,23 @@
+{
+    "definition": {
+        "openapi": "3.1.0",
+        "info": {
+            "title": "Pay Me API",
+            "version": "1.0.0",
+            "description":
+                "An API to manage hours and invoices for flreelancers.",
+            "license": {
+                "name": "MIT",
+                "url": "https://spdx.org/licenses/MIT.html"
+            }
+        },
+        "servers": [
+            {
+                "url": "http://localhost:3030"
+            }
+        ]
+    },
+    "apis": [
+        "./lib/components/**/routes.js"
+    ]
+}

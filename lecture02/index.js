@@ -4,10 +4,15 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const app = express();
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const swaggerOptions = require('./swagger.json');
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // load routers
 const adminRouter = require('./lib/components/admin/routes');
@@ -36,6 +41,9 @@ const errorHandler = (err, req, res, next) => {
     res.status(500).send('Something broke!');
 };
 app.use(errorHandler);
+
+
+
 
 app.listen(port, () => {
     console.log(`App running at http://localhost:${port}`)
