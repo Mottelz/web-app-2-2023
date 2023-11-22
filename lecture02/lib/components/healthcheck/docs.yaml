@@ -1,0 +1,23 @@
+components:
+  schemas:
+    Healthcheck:
+      type: object
+      properties:
+        status:
+          type: string
+
+paths:
+  /healthcheck/basic:
+    get:
+      tags:
+        - Admin
+      summary: Basic Healthcheck
+      description: Basic Healthcheck
+      operationId: basicHealthcheck
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Healthcheck'

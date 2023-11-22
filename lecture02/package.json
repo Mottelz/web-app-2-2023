@@ -4,7 +4,7 @@
   "description": "An app for freelancers to track their hours and create invoices",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js"
+    "test": "nodemon --config nodemon.json index.js"
   },
   "author": "Mottelz",
   "license": "MIT",

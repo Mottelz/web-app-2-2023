@@ -1,0 +1,12 @@
+paths:
+  /admin/db/init:
+    get:
+      tags:
+        - Admin
+      summary: Initialize database
+      description: Initializes or resets the database without any data
+      responses:
+        200:
+          description: Database initialized successfully
+        500:
+          description: Error initializing database
