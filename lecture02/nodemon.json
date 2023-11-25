@@ -2,6 +2,7 @@
     "ext": "js,json,yaml",
     "watch": [
         "index.js",
-        "lib/**"
+        "lib/**",
+        "swagger.json"
     ]
 }
