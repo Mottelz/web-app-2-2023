@@ -54,5 +54,5 @@ app.use(errorHandler);
 
 
 app.listen(port, () => {
-    console.log(`App running at http://localhost:${port}\nDocs running at http://localhost:${port}/docs`)
+    console.log(`App running at http://localhost:${port}\nDocs running at http://localhost:${port}/docs`);
 });

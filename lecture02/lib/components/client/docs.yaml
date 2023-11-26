@@ -1,0 +1,180 @@
+components:
+  schemas:
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the client
+        name:
+          type: string
+          description: Name of the client
+        email:
+          type: string
+          description: Email of the client
+        phone:
+          type: string
+          description: Phone number of the client
+        address:
+          type: string
+          description: Address of the client
+      required:
+        - name
+        - email
+        - phone
+        - address
+      example:
+        id: 1
+        name: John Doe
+        email: me@email.com
+        phone: 1234567890
+        address: 123 Main St
+
+paths:
+  /client/all:
+    get:
+      tags:
+        - Client
+      summary: Get all clients
+      description: Returns a list of all clients
+      responses:
+        200:
+          description: List of clients
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clients:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Client'
+
+  /client/id/{id}:
+    get:
+      tags:
+        - Client
+      summary: Get client by ID
+      description: Returns a single client
+      parameters:
+        - name: id
+          in: path
+          description: ID of client to return
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        200:
+          description: Client
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  client:
+                    type: object
+                    $ref: '#/components/schemas/Client'
+  
+  /client/name/{name}:
+    get:
+      tags:
+        - Client
+      summary: Get client by name
+      description: Returns a single client
+      parameters:
+        - name: name
+          in: path
+          description: Name of client to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Client
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  client:
+                    type: object
+                    $ref: '#/components/schemas/Client'
+  
+  /client/email/{email}:
+    get:
+      tags:
+        - Client
+      summary: Get client by email
+      description: Returns a single client
+      parameters:
+        - name: email
+          in: path
+          description: Email of client to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Client
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  client:
+                    type: object
+                    $ref: '#/components/schemas/Client'
+
+  /client/search/{name}:
+    get:
+      tags:
+        - Client
+      summary: Search clients by name
+      description: Returns a list of clients
+      parameters:
+        - name: name
+          in: path
+          description: Name of client to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: List of clients
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clients:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Client'
+  
+  /client:
+    post:
+      tags:
+        - Client
+      summary: Add a new client
+      description: Adds a new client
+      requestBody:
+        description: Client to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        200:
+          description: Client added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  client:
+                    type: object
+                    $ref: '#/components/schemas/Client'
+        500:
+          description: Error adding client

@@ -39,7 +39,8 @@ router.post('/', async (req, res) => {
         req.body.phone, 
         req.body.email
     );
-    res.json({info: info});
+    const client = await db.getClientById(info.lastInsertRowid);
+    res.json({client: client});
 });
 
 
