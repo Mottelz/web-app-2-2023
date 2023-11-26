@@ -1,0 +1,158 @@
+components:
+  schemas:
+    Invoice:
+      type: object
+      properties: 
+        id:
+          type: integer
+          format: int64
+        clientId:
+          type: integer
+          format: int64
+        date:
+          type: string
+          format: date
+      required:
+        - clientId
+        - date
+    InvoiceWithHours:
+      type: object
+      properties: 
+        id:
+          type: integer
+          format: int64
+        clientId:
+          type: integer
+          format: int64
+        date:
+          type: string
+          format: date
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hour'
+      required:
+        - clientId
+        - date
+
+paths:
+  /invoice/create:
+    post:
+      tags:
+        - Invoice
+      summary: Create invoice
+      description: Create invoice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Invoice'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+  /invoice/add:
+    post:
+      tags:
+        - Invoice
+      summary: Add existing hours to invoice
+      description: Add existing unassigned  hours record to an invoice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                invoiceId:
+                  type: integer
+                  format: int64
+                hoursId:
+                  type: integer
+                  format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/InvoiceWithHours'
+  /invoice/id/{id}:
+    get:
+      tags:
+        - Invoice
+      summary: Get invoice by id
+      description: Get invoice by id
+      parameters:
+        - name: id
+          in: path
+          description: Invoice id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/Invoice'
+  /invoice/id/{id}/full:
+    get:
+      tags:
+        - Invoice
+      summary: Get invoice by id with hours
+      description: Get invoice by id with hours
+      parameters:
+        - name: id
+          in: path
+          description: Invoice id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/InvoiceWithHours'
+  /invoice/paid/{id}:
+    post:
+      tags:
+        - Invoice
+      summary: Mark invoice as paid
+      description: Mark invoice as paid
+      parameters:
+        - name: id
+          in: path
+          description: Invoice id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                  date_paid:
+                    type: string
+                    format: date
+                  status:
+                    type: string
+  

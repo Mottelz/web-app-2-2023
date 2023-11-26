@@ -1,0 +1,175 @@
+components:
+  schemas:
+    Hour:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        timeIn:
+          type: string
+          format: date-time
+        timeOut:
+          type: string
+          format: date-time
+        clientId:
+          type: integer
+    Hours:
+      type: array
+      items:
+        $ref: '#/definitions/Hour'
+
+paths:
+  /hour/add:
+    post:
+      tags:
+        - Hour
+      summary: Add new hours
+      description: Add a new hours record with time in and out
+      operationId: addHour
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Hour object that needs to be added
+          required: true
+          schema:
+            $ref: '#/components/schemas/Hour'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hours:
+                    $ref: '#/components/schemas/Hour'
+  /hour/update/{id}:
+    post:
+      tags:
+        - Hour
+      summary: Update an existing hour
+      description: Update an existing hour
+      operationId: updateHour
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of hour to update
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: body
+          description: Hour object that needs to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/Hour'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hours:
+                    $ref: '#/definitions/Hour'
+  /hour/timeout/{id}:
+    post:
+      tags:
+        - Hour
+      summary: Update an existing hour with time out
+      description: Update an existing hour with time out
+      operationId: updateHour
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of hour to update
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: timeOut
+          description: The time out of the hour
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hours:
+                    $ref: '#/components/schemas/Hour'
+  /hour/id/{id}:
+    get:
+      tags:
+        - Hour
+      summary: Find hour by ID
+      description: Returns a single hour
+      operationId: getHourById
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of hour to return
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hours:
+                    $ref: '#/components/schemas/Hour'
+  /hour/client/{clientId}:
+    get:
+      tags:
+        - Hour
+      summary: Find hours by client ID
+      description: Returns hours for a single client
+      operationId: getHoursByClientId
+      produces:
+        - application/json
+      parameters:
+        - name: clientId
+          in: path
+          description: ID of client to return hours for
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    hours:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Hour'
+                    client:
+                      $ref: '#/components/schemas/Client'
