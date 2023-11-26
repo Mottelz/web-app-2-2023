@@ -4,15 +4,23 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const app = express();
+
+// Swagger
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const swaggerOptions = require('./swagger.json');
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
+const { SwaggerTheme } = require('swagger-themes');
+const theme = new SwaggerTheme('v3');
+const options = {
+    explorer: true,
+    customCss: theme.getBuffer('material'),
+};
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, options));
 
 // load routers
 const adminRouter = require('./lib/components/admin/routes');
@@ -46,5 +54,5 @@ app.use(errorHandler);
 
 
 app.listen(port, () => {
-    console.log(`App running at http://localhost:${port}`)
+    console.log(`App running at http://localhost:${port}\nDocs running at http://localhost:${port}/docs`)
 });
