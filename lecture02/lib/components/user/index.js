@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const db = require('./data.js');
 
 const encrypt = async (password) => {
     const encryptedPassword = await bcrypt.hash(password, 10);
@@ -10,7 +12,19 @@ const verifyPassword = async (password, encryptedPassword) => {
     return result;
 };
 
+const generateToken = async (user) => {
+    const token = await jwt.sign({ user }, process.env.JWT_SECRET, {expiresIn: '1d'});
+    return token;
+};
+
+const verifyUser = async (username) => {
+    const result = await db.getUser(username);
+    return result;
+};
+
 module.exports = {
     encrypt,
-    verifyPassword
+    verifyPassword,
+    verifyUser,
+    generateToken
 };

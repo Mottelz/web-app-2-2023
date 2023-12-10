@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const db = require('./data.js');
 const controller = require('./index.js');
+const verifyToken = require('../../middleware/verifyToken.js');
 
 router.post('/create', async (req, res) => {
     const { username, password } = req.body;
@@ -9,15 +10,21 @@ router.post('/create', async (req, res) => {
     res.json(result);
 });
 
-router.post('/delete', async (req, res) => {
-    const { username } = req.body;
+router.post('/delete', verifyToken, async (req, res) => {
+    const username = req.body.user;
     const result = await db.deleteUser(username);
     res.json(result);
 });
 
 
-router.post('/update/password', async (req, res) => {
-    const { username, password } = req.body;
+router.post('/update/password', verifyToken, async (req, res) => {
+    const { oldPassword, password } = req.body;
+    const username = req.body.user;
+    const user = await db.getUser(username);
+    const isCorrectPassword = await controller.verifyPassword(oldPassword, user.password);
+    if(!isCorrectPassword) {
+        res.json({ success: false, message: 'Old password is invalid.' });
+    };
     const encryptedPassword = await controller.encrypt(password);
     const result = await db.updatePassword(username, encryptedPassword);
     res.json(result);
@@ -30,7 +37,8 @@ router.post('/login', async (req, res) => {
     if (user) {
         const isCorrectPassword = await controller.verifyPassword(password, user.password);
         if (isCorrectPassword) {
-            res.json({ success: true });
+            const token = await controller.generateToken(user.username);
+            res.json({ token });
         } else {
             res.json({ success: false });
         }

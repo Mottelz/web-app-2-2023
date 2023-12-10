@@ -4,6 +4,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const app = express();
+const verifyToken = require('./lib/middleware/verifyToken');
+const handleError = require('./lib/middleware/handleError');
 
 // Swagger
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -22,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, options));
 
+
 // load routers
 const adminRouter = require('./lib/components/admin/routes');
 const clientRouter = require('./lib/components/client/routes');
@@ -30,11 +33,11 @@ const hoursRouter = require('./lib/components/hour/routes');
 const invoiceRouter = require('./lib/components/invoice/routes');
 const userRouter = require('./lib/components/user/routes');
 
-app.use('/admin', adminRouter);
-app.use('/client', clientRouter);
+app.use('/admin', verifyToken, adminRouter);
+app.use('/client', verifyToken, clientRouter);
 app.use('/healthcheck', healthcheckRouter);
-app.use('/hour', hoursRouter);
-app.use('/invoice', invoiceRouter);
+app.use('/hour', verifyToken, hoursRouter);
+app.use('/invoice', verifyToken, invoiceRouter);
 app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
@@ -46,11 +49,7 @@ app.all('*', (req, res) => {
     res.status(404).send('Not Found');
 });
 
-const errorHandler = (err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-};
-app.use(errorHandler);
+app.use(handleError);
 
 
 
