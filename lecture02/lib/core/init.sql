@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS invoice_lines;
 DROP TABLE IF EXISTS invoices;
 DROP TABLE IF EXISTS hours;
 DROP TABLE IF EXISTS clients;
+DROP TABLE IF EXISTS users;
 
 
 -- Create the clients table
@@ -38,4 +39,11 @@ CREATE TABLE invoice_lines (
     hours_id INTEGER NOT NULL UNIQUE,
     FOREIGN KEY (invoice_id) REFERENCES invoice(id),
     FOREIGN KEY (hours_id) REFERENCES hours(id)
+);
+
+-- Create the users table
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    username TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
 );

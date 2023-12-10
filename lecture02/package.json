@@ -9,6 +9,7 @@
   "author": "Mottelz",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "better-sqlite3": "^9.0.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
