@@ -66,6 +66,8 @@ paths:
         - Invoice
       summary: Add existing hours to invoice
       description: Add existing unassigned  hours record to an invoice
+      security:
+        - bearerAuth: []
       requestBody:
         content:
           application/json:
@@ -91,6 +93,8 @@ paths:
         - Invoice
       summary: Get invoice by id
       description: Get invoice by id
+      security:
+        - bearerAuth: []
       parameters:
         - name: id
           in: path
@@ -112,6 +116,8 @@ paths:
         - Invoice
       summary: Get invoice by id with hours
       description: Get invoice by id with hours
+      security:
+        - bearerAuth: []
       parameters:
         - name: id
           in: path
@@ -133,6 +139,8 @@ paths:
         - Invoice
       summary: Mark invoice as paid
       description: Mark invoice as paid
+      security:
+        - bearerAuth: []
       parameters:
         - name: id
           in: path

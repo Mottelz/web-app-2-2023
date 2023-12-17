@@ -26,7 +26,8 @@ paths:
         - Hour
       summary: Add new hours
       description: Add a new hours record with time in and out
-      operationId: addHour
+      security:
+        - bearerAuth: []
       consumes:
         - application/json
       produces:
@@ -54,7 +55,8 @@ paths:
         - Hour
       summary: Update an existing hour
       description: Update an existing hour
-      operationId: updateHour
+      security:
+        - bearerAuth: []
       consumes:
         - application/json
       produces:
@@ -88,7 +90,8 @@ paths:
         - Hour
       summary: Update an existing hour with time out
       description: Update an existing hour with time out
-      operationId: updateHour
+      security:
+        - bearerAuth: []
       consumes:
         - application/json
       produces:
@@ -123,7 +126,8 @@ paths:
         - Hour
       summary: Find hour by ID
       description: Returns a single hour
-      operationId: getHourById
+      security:
+        - bearerAuth: []
       produces:
         - application/json
       parameters:
@@ -149,7 +153,8 @@ paths:
         - Hour
       summary: Find hours by client ID
       description: Returns hours for a single client
-      operationId: getHoursByClientId
+      security:
+        - bearerAuth: []
       produces:
         - application/json
       parameters:

@@ -37,6 +37,8 @@ paths:
         - Client
       summary: Get all clients
       description: Returns a list of all clients
+      security:
+        - bearerAuth: []
       responses:
         200:
           description: List of clients
@@ -56,6 +58,8 @@ paths:
         - Client
       summary: Get client by ID
       description: Returns a single client
+      security:
+        - bearerAuth: []
       parameters:
         - name: id
           in: path
@@ -82,6 +86,8 @@ paths:
         - Client
       summary: Get client by name
       description: Returns a single client
+      security:
+        - bearerAuth: []
       parameters:
         - name: name
           in: path
@@ -107,6 +113,8 @@ paths:
         - Client
       summary: Get client by email
       description: Returns a single client
+      security:
+        - bearerAuth: []
       parameters:
         - name: email
           in: path
@@ -132,6 +140,8 @@ paths:
         - Client
       summary: Search clients by name
       description: Returns a list of clients
+      security:
+        - bearerAuth: []
       parameters:
         - name: name
           in: path
@@ -158,6 +168,8 @@ paths:
         - Client
       summary: Add a new client
       description: Adds a new client
+      security:
+        - bearerAuth: []
       requestBody:
         description: Client to add
         required: true
