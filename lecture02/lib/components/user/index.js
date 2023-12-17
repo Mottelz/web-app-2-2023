@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const db = require('./data.js');
 
 const encrypt = async (password) => {
+    if (!password) throw new Error('Password is required.');
     const encryptedPassword = await bcrypt.hash(password, 10);
     return encryptedPassword;
 };

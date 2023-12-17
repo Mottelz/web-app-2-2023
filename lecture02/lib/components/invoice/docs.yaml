@@ -42,6 +42,8 @@ paths:
         - Invoice
       summary: Create invoice
       description: Create invoice
+      security:
+        - bearerAuth: []
       requestBody:
         content:
           application/json:

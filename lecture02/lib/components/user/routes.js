@@ -18,16 +18,16 @@ router.post('/delete', verifyToken, async (req, res) => {
 
 
 router.post('/update/password', verifyToken, async (req, res) => {
-    const { oldPassword, password } = req.body;
+    const { oldPassword, newPassword } = req.body;
     const username = req.body.user;
     const user = await db.getUser(username);
     const isCorrectPassword = await controller.verifyPassword(oldPassword, user.password);
     if(!isCorrectPassword) {
         res.json({ success: false, message: 'Old password is invalid.' });
     };
-    const encryptedPassword = await controller.encrypt(password);
+    const encryptedPassword = await controller.encrypt(newPassword);
     const result = await db.updatePassword(username, encryptedPassword);
-    res.json(result);
+    res.json({ success: true, message: 'Password updated.' });
 });
 
 
